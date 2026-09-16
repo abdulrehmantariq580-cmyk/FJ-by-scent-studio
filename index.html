@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FJ By Scent Studio | Luxury Fragrances</title>
+    
+    <!-- Google Fonts for Luxury Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Variables based on Brand Identity */
+        :root {
+            --burgundy: #4A0413;
+            --gold: #D4AF37;
+            --gold-light: #F3E5AB;
+            --dark-bg: #0a0a0a;
+            --card-bg: #151515;
+            --text-light: #f5f5f5;
+            --text-muted: #aaaaaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .brand-font {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* --- Navbar --- */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 24px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+        }
+
+        /* Nav Links Centered in PC */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--gold);
+        }
+
+        .close-menu {
+            display: none;
+        }
+
+        /* Header Right Side (Cart & Menu Icon) */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cart-icon {
+            color: var(--gold);
+            font-size: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--burgundy);
+            color: white;
+            font-size: 12px;
+            padding: 2px 6px;
+            border-radius: 50%;
+            border: 1px solid var(--gold);
+        }
+
+        .hamburger {
+            display: none;
+            color: var(--gold);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(74, 4, 19, 0.8)), url('media/banner.webp') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            color: var(--gold-light);
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--gold);
+            color: var(--dark-bg);
+        }
+
+        /* --- Products Section --- */
+        .products-section {
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
+            border-color: var(--gold);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--burgundy);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--burgundy);
+            color: var(--gold-light);
+            border: 1px solid var(--gold);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-add:hover {
+            background-color: var(--gold);
+            color: var(--dark-bg);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #050505;
+            padding: 60px 5% 20px;
+            border-top: 2px solid var(--burgundy);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-col h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .footer-col p {
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .footer-col i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+
+        .social-links a {
+            color: var(--gold);
+            font-size: 20px;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-muted);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+        }
+
+        /* --- Media Queries (Mobile Responsiveness) --- */
+        @media (max-width: 768px) {
+            .logo { font-size: 18px; }
+            .logo img { width: 40px; height: 40px; }
+            
+            .hero h1 { font-size: 2.5rem; }
+            
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 250px;
+                background-color: var(--dark-bg);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 80px 30px 30px 30px;
+                border-left: 2px solid var(--burgundy);
+                transition: right 0.4s ease-in-out;
+                z-index: 1001;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.8);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .close-menu {
+                display: block;
+                position: absolute;
+                top: 25px;
+                right: 25px;
+                color: var(--gold);
+                font-size: 24px;
+                cursor: pointer;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px; 
+            }
+
+            .product-img {
+                height: 200px;
+            }
+
+            .product-info {
+                padding: 10px;
+            }
+
+            .product-title {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .product-price {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .btn-add {
+                padding: 8px;
+                font-size: 0.85rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 25px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .product-title { font-size: 0.95rem; }
+            .product-img { height: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo brand-font">
+            <img src="media/logo.webp" alt="FJ By Scent Studio Logo">
+            FJ By Scent Studio
+        </a>
+        
+        <!-- Yahan Navigations Center Mein Aa Gayi Hain -->
+        <ul class="nav-links" id="nav-links">
+            <div class="close-menu" id="close-menu"><i class="fas fa-times"></i></div>
+            <li><a href="#">Home</a></li>
+            <li><a href="#collection">Collection</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Yahan Cart Aur Mobile Icon Right Par Aa Gaye Hain -->
+        <div class="header-actions">
+            <div class="cart-icon">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <!-- Hamburger Icon for Mobile -->
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="brand-font">Signature Fragrances for the Modern Royal</h1>
+        <p>Making luxury scent accessible. Experience the timeless elegance and bold mystery of our exclusive collections.</p>
+        <a href="#collection" class="btn">Explore Collection</a>
+    </section>
+
+    <!-- Products Section -->
+    <section id="collection" class="products-section">
+        <h2 class="section-title">Our Exclusive Scents</h2>
+        <p class="section-subtitle">Crafted with perfection in every drop</p>
+
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="media/product_1.webp" alt="French Versace" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">French Versace</h3>
+                    <p class="product-price">Rs. 4,500</p>
+                    <button class="btn-add" onclick="addToCart('French Versace')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="media/product_2.webp" alt="Sauvage" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Sauvage</h3>
+                    <p class="product-price">Rs. 5,000</p>
+                    <button class="btn-add" onclick="addToCart('Sauvage')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="media/product_3.webp" alt="Maison Oud Blanc & Ambre" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Maison Oud Blanc</h3>
+                    <p class="product-price">Rs. 6,200</p>
+                    <button class="btn-add" onclick="addToCart('Maison Oud Blanc')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="media/product_4.webp" alt="Sutta Smoke" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Sutta Smoke</h3>
+                    <p class="product-price">Rs. 4,800</p>
+                    <button class="btn-add" onclick="addToCart('Sutta Smoke')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="media/product_5.webp" alt="Valentino Roma" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Valentino Roma</h3>
+                    <p class="product-price">Rs. 5,500</p>
+                    <button class="btn-add" onclick="addToCart('Valentino Roma')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="media/product_6.webp" alt="Tiziana Kirke" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Tiziana Kirke</h3>
+                    <p class="product-price">Rs. 5,800</p>
+                    <button class="btn-add" onclick="addToCart('Tiziana Kirke')">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3 class="brand-font">FJ By Scent Studio</h3>
+                <p>Signature fragrances for the modern royal. 👑<br>Making luxury scent accessible. 💎</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="brand-font">Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Gulshan e Iqbal, Karachi, Pakistan</p>
+                <p><i class="fab fa-whatsapp"></i> +92 334 9893376</p>
+                <p><i class="fas fa-envelope"></i> info@fjscentsstudio.com</p>
+            </div>
+            <div class="footer-col">
+                <h3 class="brand-font">Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://instagram.com/fjscentsstudio" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 FJ By Scent Studio. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/923349893376" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // --- Sliding Menu Logic ---
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const closeMenu = document.getElementById('close-menu');
+        const navItems = document.querySelectorAll('.nav-links li a');
+
+        // Open Menu
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.add('active');
+        });
+
+        // Close Menu via X button
+        closeMenu.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+
+        // Close Menu when a link is clicked
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // --- Add to Cart Logic ---
+        let cartItems = 0;
+        function addToCart(productName) {
+            cartItems++;
+            document.getElementById('cart-count').innerText = cartItems;
+            alert(productName + " has been added to your royal cart! 👑");
+        }
+
+        // --- Smooth Scrolling for Navbar Links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
